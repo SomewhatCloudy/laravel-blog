@@ -17,6 +17,7 @@ use BinshopsBlog\Requests\CreateBinshopsBlogPostRequest;
 use BinshopsBlog\Requests\DeleteBinshopsBlogPostRequest;
 use BinshopsBlog\Requests\UpdateBinshopsBlogPostRequest;
 use BinshopsBlog\Traits\UploadFileTrait;
+use Illuminate\Support\Str;
 use Swis\Laravel\Fulltext\Search;
 
 /**
@@ -212,7 +213,7 @@ class BinshopsBlogAdminController extends Controller
                 // this image size is enabled, and
                 // we have an uploaded image that we can use
 
-                $uploaded_image = $this->UploadAndResize($new_blog_post, $new_blog_post->slug, $image_size_details, $photo);
+                $uploaded_image = $this->UploadAndResize($new_blog_post, Str::slug($new_blog_post->title), $image_size_details, $photo);
 
                 $new_blog_post->$size = $uploaded_image['filename'];
                 $uploaded_image_details[$size] = $uploaded_image;
